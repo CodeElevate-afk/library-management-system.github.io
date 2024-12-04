@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    
+
+    <h1>Library Management System</h1>
+
+    <!-- Authentication UI -->
+<div id="auth-section">
+    <div id="user-info">
+        <p id="user-id"></p>
+        <p id="user-name"></p>
+        <p id="last-login-date"></p>
+        <button class="log-out-btn" id="logout-btn">Logout</button>
+    </div>
+</div>
+
+    <!-- Add Book Form -->
+    <form id="add-book-form">
+        <h2>Add Book</h2>
+        <input type="text" id="book-title" placeholder="Title" required>
+        <input type="text" id="book-author" placeholder="Author" required>
+        <input type="number" id="book-year" placeholder="Year" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <!-- Add User Form -->
+    <form id="add-user-form">
+        <h2>Add User</h2>
+        <label for="student-uid">Student UID:</label>
+        <input type="text" id="student-uid" placeholder="Student UID" required>
+        <label for="user-name">Student Name:</label>
+        <input type="text" id="user-name" placeholder="Student Name" required>
+        <label for="user-phone">Phone Number:</label>
+        <input type="tel" id="user-phone" placeholder="Phone Number" required>
+        <label for="user-email">Email Address:</label>
+        <input type="email" id="user-email" placeholder="Email Address" required>
+        <button type="submit">Add User</button>
+    </form>
+
+    <!-- Lend Book Form -->
+    <form id="lend-book-form">
+        <h2>Lend Book</h2>
+        <label for="lend-book-title">Book Title:</label>
+        <input type="text" id="lend-book-title" placeholder="Book Title" required>
+        <label for="lend-user-name">Student UID:</label>
+        <input type="text" id="lend-user-name" placeholder="Student UID" required>
+        <label for="lend-timestamp">Timestamp:</label>
+        <input type="datetime-local" id="lend-timestamp" required>
+        <button type="submit">Lend Book</button>
+    </form>
+
+    <!-- Update Book Form -->
+    <form id="update-book-form" style="display: none;">
+        <h2>Update Book</h2>
+        <input type="hidden" id="update-book-id">
+        <label for="update-book-title">Title:</label>
+        <input type="text" id="update-book-title" placeholder="Title" disabled readonly>
+        <label for="update-book-author">Author:</label>
+        <input type="text" id="update-book-author" placeholder="Author" required>
+        <label for="update-book-year">Year:</label>
+        <input type="number" id="update-book-year" placeholder="Year" required>
+        <button type="submit">Update Book</button>
+    </form>
+
+    <!-- Books List Table -->
+    <h2>Books List</h2>
+    <table id="books-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Book rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Update User Form -->
+    <form id="update-user-form" style="display: none;">
+        <h2>Update User</h2>
+        <input type="hidden" id="update-user-id">
+        <label for="update-student-uid">Student UID:</label>
+        <span id="student-uid-display"></span>
+        <input type="text" id="update-student-uid" placeholder="Student UID" disabled readonly>
+        <label for="update-user-name">Student Name:</label>
+        <input type="text" id="update-user-name" placeholder="Student Name" disabled readonly>
+        <label for="update-user-phone">Phone Number:</label>
+        <input type="tel" id="update-user-phone" placeholder="Phone Number" required>
+        <label for="update-user-email">Email Address:</label>
+        <input type="email" id="update-user-email" placeholder="Email Address" required>
+        <button type="submit">Update User</button>
+    </form>
+
+    <!-- Users List Table -->
+    <h2>Users List</h2>
+    <table id="users-table">
+        <thead>
+            <tr>
+                <th>Student UID</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- User rows will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Borrowed Books -->
+    <h2>Borrowed Books</h2>
+    <table id="borrowed-books-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>User</th>
+                <th>Date Borrowed</th>
+                <th>Days Kept</th>
+                <th>Penalty</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="borrowed-books-list">
+            <!-- Borrowed books list items will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script type="module" src="script.js"></script>
+    <script>
+        // Check for authentication token on page load
+        const authToken = localStorage.getItem('authToken');
+    
+        if (!authToken) {
+            window.location.href = 'welcome.html'; // Redirect to welcome page if no token
+        }
+    
+        // Verify the authentication token
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = 'welcome.html'; // Redirect to welcome page if token is invalid
+            }
+        });
+    
+        // Disable back button and clear browser history
+        window.history.forward();
+        window.history.clear();
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+
+</html>

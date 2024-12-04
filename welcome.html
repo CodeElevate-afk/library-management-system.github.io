@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to the Library Management System</h1>
+    <p>Please choose your role:</p>
+    <a href="employer.html">Employer</a> | <a href="employee-login.html">Employee Login</a>
+    <script>
+        // Clear authentication token on welcome page load
+        localStorage.removeItem('authToken');
+    </script>
+</body>
+</html>
